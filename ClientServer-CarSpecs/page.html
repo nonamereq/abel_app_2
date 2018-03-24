@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title></title>
+        <style>
+            body 
+            {
+               background-color: black;
+            }
+            #formContainer {
+    width: 20%;
+    margin-left: 36%;
+    margin-top: 15%;
+    background-color: brown;
+}
+#search {
+    margin-left: 35%;
+    border-radius: 20px;
+    margin-bottom: 2%;
+}
+
+#inputField {
+    margin-top: 8%;
+    margin-left: 20%;
+    border-radius: 3px; 
+}
+#generatedContent {
+    width: 30%;
+    background-color:brown;
+    margin-left: 31%;
+    margin-top: 2%;
+}
+#response {
+    width: 90%;
+    margin-left: 5%;
+    
+}
+            
+         </style>
+    </head>
+    <body>
+        <div id="formContainer">
+           <form action="#"  id="form" >
+               <input type="text"  id="inputField"/><br><br>
+                 <button id="search">Search</button>
+           </form>
+           
+        </div>
+        <div id="generatedContent">
+            <div id="response"></div>
+        </div>
+        
+        <script type="text/javascript">
+        var searchButton = document.getElementById("search");
+        searchButton.onclick=function(){
+            var searchedModel = document.getElementById('inputField').value;
+           
+            var httpRequest = new XMLHttpRequest();
+            httpRequest.onreadystatechange = function(){
+			if(httpRequest.readyState == XMLHttpRequest.DONE){
+			
+				if(httpRequest.status == 200){
+				    document.getElementById("response").innerHTML =httpRequest.responseText;
+				}
+				else {
+					
+					console.log("in else");
+				}
+
+			}
+			
+		}
+		httpRequest.open('GET','/search?car=' + searchedModel,true );
+		httpRequest.send(); 
+        } 
+        </script>
+    </body>
+</html>
+
+
+
